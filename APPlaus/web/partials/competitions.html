@@ -1,0 +1,34 @@
+<div ng-swipe-right="changeView('userFront')">
+    <p>
+        Konkurranser:
+        <br>
+        Applaus 2.0
+        heieh
+        heihei
+    </p>
+    <img src="http://placehold.it/200x200">
+    
+    <table class="table table-hover table-competitions">
+        <thead>
+            <tr>
+                <th>Tittel</th>
+                <th>Frist</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="competition in competitions">
+            <tr ng-click="getDetailCompetition($index)" ng-swipe-left="showDelete($index)">
+                <td><div class="title-field">{{competition.title| date:'medium'}}</div></td>
+                <td>{{competition.end}}</td>
+                <td class="text-right" style="padding: 0px; width: 86px;">
+                    <span ng-show="showThisDelete($index)">
+                        <a style="height: 100%;" class="btn btn-danger" ng-click="deleteClick($index)">
+                            <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                    </span>
+                    <span ng-show="!showThisDelete($index)" style="color: lightgray;" class="glyphicon glyphicon-chevron-right"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
