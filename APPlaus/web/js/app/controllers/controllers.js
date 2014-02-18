@@ -80,9 +80,6 @@ angular.module('employeeApp.controllers', [])
     $scope.changeView = function(view) {
         $location.path(view); // path not hash
     };
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
     $scope.assignments = [
         {name:"Red note", text:"Skriv en red note", points:5},
         {name:"Yellow note", text:"Skriv en red note", points:15},
@@ -91,9 +88,6 @@ angular.module('employeeApp.controllers', [])
     
     //Assignment related
     $scope.selectedOption = $scope.assignments[0];
-=======
-=======
->>>>>>> 9194f6e5c097ccfa057631c52da7cc2f09f285ec
 })
 
 
@@ -145,12 +139,5 @@ angular.module('employeeApp.controllers', [])
     $scope.changeView = function(view) {
         $location.path(view); // path not hash
     };
-
-    
-<<<<<<< HEAD
->>>>>>> 9194f6e5c097ccfa057631c52da7cc2f09f285ec
-=======
->>>>>>> 9194f6e5c097ccfa057631c52da7cc2f09f285ec
-    
     
 });
