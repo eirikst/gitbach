@@ -78,12 +78,15 @@ and open the template in the editor.
     color: black;
 }
 
-accordion-group {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background-color: red;
+
+.acc {
+    max-width: 350px;
 }
 
 .navbar-color {
     background-color: white;
+}
+
+.accoordion-header {
+    background-color:red;
 }
