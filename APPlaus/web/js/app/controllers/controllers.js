@@ -57,7 +57,7 @@ angular.module('employeeApp.controllers', [])
     $http({
         url: 'MongoConnection',
         method: "POST",
-        data: "value=Hei",
+        data: "action=getContests",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).success(function(data, status, headers, config) {
         $scope.returnValue = data;//sets assignment table with info from DB
@@ -81,4 +81,59 @@ angular.module('employeeApp.controllers', [])
     $scope.changeView = function(view) {
         $location.path(view); // path not hash
     };
+})
+
+
+
+
+
+
+
+//ContestCtrl
+.controller('CompCtrl', function($scope, $location, $http) {
+    $scope.inactiveCont = new Array();
+    $scope.skipNext = 0;
+    
+    $http({
+      url: 'MongoConnection',
+      method: "POST",
+      data: "action=getActiveContests",
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function(data, status, headers, config) {
+        $scope.activeCont = data;//sets assignment table with info from DB
+    }).error(function(data, status, headers, config) {
+        return [];
+    });
+
+    
+    
+    
+    $scope.getInactiveCont = function(skip) {
+        $http({
+            url: 'MongoConnection',
+            method: "POST",
+            data: "action=getInactiveContests&skip=" + skip,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function(data, status, headers, config) {
+            for(var i = 0; i < data.length; i++) {
+                $scope.inactiveCont.push(data[i]);//sets assignment table with info from DB
+            }
+            $scope.skipNext += 7;
+        }).error(function(data, status, headers, config) {
+            //error handling
+        });
+    }
+    
+    $scope.getInactiveCont(0);
+
+
+
+    //I en service eller noe vel
+    $scope.changeView = function(view) {
+        $location.path(view); // path not hash
+    };
+
+    
+    
+    
 });

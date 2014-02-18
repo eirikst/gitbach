@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package servlet;
+package mongoConnection;
 
 import com.mongodb.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,18 +14,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author eirikstadheim
  */
 @WebServlet(name = "MongoConnection", urlPatterns = {"/MongoConnection"})
-public class MongoConnection extends HttpServlet {
+public class MongoServlet extends HttpServlet {
     private MongoClient mongo;
-            
+    private DB db;
+
+    
     @Override
     public void init() throws ServletException {
         try {
             mongo = new MongoClient( "localhost" , 27017 );
         }
         catch(java.net.UnknownHostException e) {
-            
+            //log
         }
-        DB db = mongo.getDB("APPlaus");
+        db = mongo.getDB("applaus");
     }
     
     /**
@@ -46,17 +41,31 @@ public class MongoConnection extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
+        response.setContentType("text/html");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            List<String> dbs = mongo.getDatabaseNames();
-            for(String db : dbs){
-		out.println(db);
+            
+            if(request.getParameter("action").equals("getActiveContests")) {
+                out.println(ContestManager.getActiveContests(db));
             }
-            out.println("Eiriks servlet sier at du må sette deg et mål for uka.");
+            if(request.getParameter("action").equals("getInactiveContests")) {
+                int skip = 0;
+                try {
+                    skip = Integer.parseInt(request.getParameter("skip"));
+                }
+                catch(NumberFormatException e) {
+                    // feilhåndtering
+                }
+                out.println(ContestManager.getInactiveContests(db, skip));
+            }
         }
     }
 
+    public void insert() {
+        
+    }
+
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
