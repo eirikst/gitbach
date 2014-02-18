@@ -27,7 +27,7 @@ public class MongoConnection extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            mongo = new MongoClient( "localhost" , 27017 );
+            mongo = new MongoClient( "158.38.184.123" , 27017 );
         }
         catch(java.net.UnknownHostException e) {
             

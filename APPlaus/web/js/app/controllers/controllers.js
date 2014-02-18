@@ -21,8 +21,6 @@ angular.module('employeeApp.controllers', [])
     slides.push({image:'http://placehold.it/800x320', text:'Antall poeng samlet denne måned', points:$scope.monthPoints});
     slides.push({image:'http://placehold.it/800x320', text:'Antall poeng samlet i år', points:$scope.yearPoints});
     
-
-    
     
     //Goal related
     
@@ -74,6 +72,7 @@ angular.module('employeeApp.controllers', [])
         $location.path(view); // path not hash
     };
     
+    
 })
 
 
@@ -81,4 +80,15 @@ angular.module('employeeApp.controllers', [])
     $scope.changeView = function(view) {
         $location.path(view); // path not hash
     };
+    
+    $scope.assignments = [
+        {name:"Red note", text:"Skriv en red note", points:5},
+        {name:"Yellow note", text:"Skriv en red note", points:15},
+        {name:"Blue note", text:"Skriv en red note", points:45}
+    ];
+    
+    //Assignment related
+    $scope.selectedOption = $scope.assignments[0];
+    
+    
 });
